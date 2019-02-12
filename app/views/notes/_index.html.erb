@@ -1,0 +1,27 @@
+
+<div class="col-md-8" style="overflow:scroll">
+  <table class="table " border="2" >
+    <thead class="table-dark">
+      <tr>
+        <th><center>No.</center></th>
+        <th><center>Title</center></th>
+        <th><center>Description</center></th>
+        <th colspan="3"><center>Actions</center></th>
+      </tr>
+    </thead>
+    <tbody class="notes-index">
+      <% no = 1%>
+      <% @n.each do |note| %>
+        <tr class="table-info">
+          <td><%= no %></td>
+          <td class="text-dark"><%= note.title %></td>
+          <td><%= note.description %></td>
+          <td><%= link_to 'Show', note ,remote: true , class: "btn btn-info text-dark" %></td>
+          <td><%= link_to 'Edit', edit_note_path(note), remote: true, class: "btn btn-primary text-dark" %></td>
+          <td><%= link_to 'Delete', note, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger text-dark" %></td>
+        </tr>
+        <% no += 1%>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,9 @@
+<h2>Edit comment</h2>
+<%= form_for([ @note, @comment ]) do |form| %>
+ <p>
+   <%= form.text_area :body, class: "form-control" %>
+ </p>
+ <p>
+   <%= form.submit class: "btn btn-primary" %>
+ </p>
+<% end %>

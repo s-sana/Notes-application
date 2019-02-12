@@ -1,0 +1,19 @@
+// Place all the styles related to the Notes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.size{
+  font-size:17px;
+  width:210px;
+}
+.sidemenu{
+  height:500px;
+  width:300px;
+  overflow:scroll;
+}
+.border{
+  border: solid black 1px;
+}
+.new-note{
+  padding-bottom: 20px;
+}

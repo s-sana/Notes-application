@@ -1,0 +1,30 @@
+<div class="container-fluid col col-md-8">
+  <table border="1" class="table" width="500px">
+    <tr>
+      <td><strong><h2 align="center"><%= @note.title %></h2></strong></td>
+    </tr>
+    <tr>
+      <td><%= @note.description %></td>
+    </tr>
+    <tr>
+      <td><strong>Comments</strong> <%= link_to 'New comment', new_note_comment_path(@note), class: "btn btn-primary pull-right" ,remote: true %></td>
+    </tr>
+    <tr>
+      <td><%= render @note.comments.paginate(:page => params[:page], :per_page => 2) , collection: @cm %>
+      </td>
+    </tr>
+    <tr>
+      <td><%= will_paginate @cm %></td>
+    </tr>
+    <tr>
+      <td><div id="comment-form"></div></td>
+    </tr>
+    <tr>
+      <td><%= link_to 'Edit note', edit_note_path(@note), class: "btn btn-info pull-right" ,remote: true%></td>
+    </tr>
+
+  </table>
+
+
+
+</div>

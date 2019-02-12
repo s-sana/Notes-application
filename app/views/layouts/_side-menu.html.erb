@@ -1,0 +1,23 @@
+<br><br>
+<div class="sidemenu">
+  <%= form_with  method: :get, url: notes_path ,local: true  do |f| %>
+    <%= f.search_field :search , class: "size " %>
+    <%= f.submit 'Search', class: "btn btn-success pull-right" %>
+<% end %>
+
+      <table class="table table-hover bg-info">
+        <tbody>
+          <% @notes.each do |note| %>
+            <tr>
+              <td><div class="size"><%= link_to note.title , note_shownote_path(note),remote: true %></div><br><br>
+
+                    <%= link_to "Comment", note, class: "text-danger bg-success btn btn-info pull-right" , remote: true %>
+                    <%#  User.select(:username).find(note.user_id).username %>
+            </tr>
+          <% end %>
+
+
+        </tbody>
+      </table>
+<%= will_paginate @nm %>
+</div>

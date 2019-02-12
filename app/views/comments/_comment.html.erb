@@ -1,0 +1,13 @@
+<table class="table">
+
+
+  <tr>
+    <td>
+     <strong><%= User.select(:username).find(comment.user_id).username %> -</strong> <%= comment.body %> <br>
+        <%= link_to 'Edit',edit_note_comment_path(@note,comment), remote: true %>
+        <%= link_to 'Delete', [comment.note, comment],
+                 method: :delete,
+                 data: { confirm: 'Are you sure?' } %>
+    </td>
+  </tr>
+</table>
