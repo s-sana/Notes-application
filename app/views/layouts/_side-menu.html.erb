@@ -1,9 +1,10 @@
 <br><br>
-<div class="sidemenu">
-  <%= form_with  method: :get, url: notes_path ,local: true  do |f| %>
-    <%= f.search_field :search , class: "size " %>
-    <%= f.submit 'Search', class: "btn btn-success pull-right" %>
+<%= form_with  method: :get, url: notes_path ,local: true  do |f| %>
+  <%= f.search_field :search , class: "size" %>
+  <%= f.submit 'Search', class: "btn btn-success pull-right" %>
 <% end %>
+<div class="sidemenu">
+
 
       <table class="table table-hover bg-info">
         <tbody>
@@ -19,5 +20,5 @@
 
         </tbody>
       </table>
-<%= will_paginate @nm %>
+<%= will_paginate @notes %>
 </div>

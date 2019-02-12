@@ -1,12 +1,9 @@
 class CommentsController < ApplicationController
-#@cm = @note.comments.paginate(:page => params[:page], :per_page => 2 )
+
   def index
-    #@note = Note.find(params[:note_id])
-#@cm = @note.comments.paginate(:page => params[:page], :per_page => 2 )
   end
+  
   def show
-  #  @note = Note.find(params[:note_id])
-  #  @comments = @note.comments.paginate(:page => params[:page], :per_page => 2)
   end
 
   def new

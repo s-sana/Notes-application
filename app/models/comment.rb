@@ -1,5 +1,6 @@
 class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :note
-  #self.per_page = 2
+  validates :user, presence: true
+  validates :note, presence: true
 end

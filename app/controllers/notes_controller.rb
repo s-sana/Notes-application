@@ -1,22 +1,26 @@
 class NotesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_note, only: [:show, :edit, :update, :destroy]
-  require 'will_paginate/collection'
-  require 'will_paginate/array'
+  #require 'will_paginate/collection'
+  #require 'will_paginate/array'
   # GET /notes
   # GET /notes.json
   def index
-    @note = Note.where(user_id: current_user.id , status: true)
+    @n = Note.where(user_id: current_user.id , status: true)
   #  @notes = Note.where(status: true).order(created_at: :desc)
     @notes = if params[:search]
-      Note.where('title LIKE ?', "%#{params[:search]}%" )
+      #Note.where('title LIKE ?', "%#{params[:search]}%").or(Note.where('description LIKE ?', "#{params[:search]}%").paginate(:page => params[:page], :per_page => 4))
+      @notes = Note.where("title LIKE ? OR description LIKE ?", "%#{params[:search]}%" , "%#{params[:search]}%").paginate(:page => params[:page], :per_page => 4).where(status: true, user_id: current_user.id)
+    #  if @notes.blank?
+    #    redirect_to notes_path
+    #  end
+
     #  Note.where('"title LIKE ?", ''%#{params[:search]}%',status: true, user_id: current_user.id)
     #  Note.where(status: true ,user_id: current_user.id , 'title LIKE :query', query: "%#{params[:search]}%" )
     else
-      @nm = Note.where(status: true, user_id: current_user.id).order(created_at: :desc).paginate(:page => params[:page], :per_page => 2)
-    end
+      @notes = Note.where(status: true, user_id: current_user.id).order(created_at: :desc).paginate(:page => params[:page], :per_page => 4)
 
-  #  @nm = Note.paginate(:page => params[:page], :per_page => 2)
+    end
   end
 
   # GET /notes/1
@@ -26,7 +30,7 @@ class NotesController < ApplicationController
 
   def shownote
     @note = Note.find(params[:note_id])
-
+    @comments = Note.paginate(:page => params[:page], :per_page => 2)
   end
   # GET /notes/new
   def new

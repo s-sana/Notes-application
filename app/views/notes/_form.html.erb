@@ -4,6 +4,7 @@
       <div class="modal-body">
         <ul class="errors"></ul>
 
+
         <div class="form-group">
           <%= form.label :title, class: "control-label" %>
           <%= form.text_field :title, class: "form-control" %>
@@ -17,12 +18,14 @@
         <div class="form-group">
           <%= form.hidden_field :user_id, :value => current_user.id %>
         </div>
+
         <div class="modal-footer">
           <div class="actions">
             <%= form.submit class: "btn btn-success" %>
             <%= link_to "Cancel", "#", class: "btn btn-danger", data: {dismiss: "modal"} %>
           </div>
         </div>
+        
       </div>
 
 
