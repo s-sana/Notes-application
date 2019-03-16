@@ -1,0 +1,84 @@
+<script type="text/javascript">
+  $(function(){
+     $('#pagination-comments a').attr('data-remote', 'true')
+   });
+</script>
+
+<%= render 'layouts/header' %>
+
+<br>
+<%# link_to 'New Note', new_note_path, remote: true %>
+<div class="modal fade" id="note-form"></div>
+
+<div id="index-form"></div>
+
+<div class="container-fluid ">
+
+  <table border="1" class="table" width="500px">
+
+    <tr>
+      <td><strong><h2 align="center"><%= @note.title %></h2></strong></td>
+    </tr>
+
+    <tr>
+      <td><%= @note.description.html_safe %></td>
+    </tr>
+
+    <tr>
+      <td>
+        <strong>Tags:</strong>
+        <%= raw(
+          @note.tag_list.map { |t| link_to t, tag_notes_path(t),
+          remote: true
+          }.join(', ')
+         )
+        %>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <strong>Comments</strong>
+        <%= link_to 'New comment',
+          new_note_comment_path(@note),
+          class: "btn btn-primary pull-right" ,
+          remote: true
+        %>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <div id="see-comments">
+          <%= render @note.comments.paginate(:page => params[:page], :per_page => 2) , collection: @comments %>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <div id="pagination-comments">
+          <%= will_paginate @comments %>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <div id="comment-form"></div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <% if NoteShare.select(:email).where(edit: true) %>
+          <%= link_to 'Edit note', edit_note_path(@note), class: "btn btn-info pull-right" ,remote: true %>
+        <% else %>
+          <%= link_to 'Request for Edit'%>
+        <% end %>
+      </td>
+    </tr>
+
+  </table>
+
+</div>

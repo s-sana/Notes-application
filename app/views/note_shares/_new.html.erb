@@ -1,0 +1,36 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <%= form_with model: [ note, note.note_shares.build ],remote: true do |f| %>
+    <div class="modal-body">
+
+      <div class="modal-header">
+        <h3>Share with</h3>
+      </div>
+
+      <ul class="errors"></ul>
+
+      <div class="form-group">
+        <%= f.label 'Email' , class: "form-label" %>
+        <%= f.email_field :email , class: "form-control" %>
+      </div>
+
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= f.hidden_field :note_id, value:  note.id %>
+
+      <div class="form-group">
+        <p><strong>Note:- </strong><b><u><%= note.title%></u></b></p>
+        <p><strong>Permissions:- </strong>
+          <b><%= f.check_box :edit %>Edit</b>
+          <b><%= f.check_box :view %>View</b>
+        </p>
+      </div>
+
+      <div class="modal-footer">
+        <%= f.submit 'Share', class: "btn btn-primary" %>
+        <%= link_to "Cancel", "#", class: "btn btn-danger", data: {dismiss: "modal"} %>
+      </div>
+
+    </div>
+    <% end %>
+  </div>
+</div>

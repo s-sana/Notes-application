@@ -1,2 +1,2 @@
-$("#note-form").html(" <%= escape_javascript(render 'new') %>" );
-$("#note-form").modal("show");
+$("#note-form").html(" <%= escape_javascript(render 'new', note: @note) %>" )
+$("#note-form").modal("show")

@@ -1,0 +1,37 @@
+<table class="table table-hover">
+  <tr>
+    <th>Id</th>
+    <th>Username</th>
+    <th>Reason</th>
+    <th>Status</th>
+    <th>Action</th>
+  </tr>
+  <% Refund.includes(:user,:status).all.each do |refund| %>
+    <tr>
+      <td><%= refund.id %></td>
+      <td><%= refund.user.username %></td>
+      <td><%= refund.reason %></td>
+      <td><%# refund.status.name %></td>
+      <td>
+        <% if refund.status.id == 1 %>
+          <%= link_to "Accept Refund",
+            refunds_refund_action_path(id: refund.id,status: 2),
+            class: "btn btn-success",
+            title: "Accept refund"
+          %>
+          &nbsp;&nbsp;&nbsp;
+          <%= link_to "Decline Refund",
+           refunds_refund_action_path(id: refund.id,status: 3),
+           data: { confirm: 'Are you sure?' },
+           class: "btn btn-danger" ,
+           title: "Decline Refund"
+          %>
+        <% else %>
+          <div class="bg-info">
+            <b>Processed</b>
+          </div>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>

@@ -1,24 +1,86 @@
-<br><br>
+<br>
+<div class="d-block bg-danger col-md-6 pull-right">
+  <h5>Autosave&nbsp&nbsp
+    <span>
+      <%= link_to "#{ current_user.autosave ? 'ON' : 'OFF' }",
+        auto_save_notes_path,
+        method: :patch,
+        remote: true,
+        class: "btn btn-xs btn-#{ current_user.autosave ? 'success' : 'danger' }"
+      %>
+    </span>
+  </h5>
+</div>
+
+<br><br><br>
+
 <%= form_with  method: :get, url: notes_path ,local: true  do |f| %>
   <%= f.search_field :search , class: "size" %>
   <%= f.submit 'Search', class: "btn btn-success pull-right" %>
 <% end %>
+
 <div class="sidemenu">
+  <table class="table table-hover bg-info" style="text-decoration:none;">
+    <tbody>
+      <% notes.each do |note| %>
+        <tr ">
+          <td>
+            <%= link_to note.title,
+             shownote_note_path(note),
+             class: "title",
+             # style: "text-decoration:none;color:#000066;",
+             remote: true
+            %>
+            <span>&nbsp</span>
+            <%=link_to "",
+              new_note_note_share_path(note),
+              class: "glyphicon glyphicon-share share",
+              remote: true
+              # style: "font-size:15px;text-decoration:none;",
+            %>
 
+            <% if note.important == true %>
+              <%=link_to "",
+                important_note_path(note),
+                class: "glyphicon glyphicon-check pull-right important"
+                # style: "font-size:15px;text-decoration:none;color:#3333ff"
+              %>
+            <% else %>
+              <%=link_to "",
+                important_note_path(note),
+                class: "glyphicon glyphicon-unchecked pull-right important"
+                # style: "font-size:15px;text-decoration:none;color:#3333ff"
+              %>
+            <% end %>
 
-      <table class="table table-hover bg-info">
-        <tbody>
-          <% @notes.each do |note| %>
-            <tr>
-              <td><div class="size"><%= link_to note.title , note_shownote_path(note),remote: true %></div><br><br>
+            <br>
 
-                    <%= link_to "Comment", note, class: "text-danger bg-success btn btn-info pull-right" , remote: true %>
-                    <%#  User.select(:username).find(note.user_id).username %>
-            </tr>
-          <% end %>
+            <%= link_to "",
+              note,
+              method: :delete,
+              data: { confirm: 'Are you sure?'},
+              class: "glyphicon glyphicon-trash data-toggle='tooltip' title='Delete' delete "
+              # style: "color:#ff0000;font-size:15px;"
+            %>
+            <%= link_to "",
+              edit_note_path(note),
+              class: "glyphicon glyphicon-edit edit",
+              # style: "color:black;font-size:15px;",
+              remote: true
+            %>
 
+            <div class="pull-right">
+              <%= raw(
+                note.tag_list.map { |t| link_to t, tag_notes_path(t) ,
+                 remote: true
+                }.join(' '))
+              %>
+            </div>
 
-        </tbody>
-      </table>
-<%= will_paginate @notes %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate notes %>
 </div>

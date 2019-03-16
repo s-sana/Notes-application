@@ -1,0 +1,5 @@
+<% if NoteShare.edit == true %>
+  $(".autosave").html('True').removeClass('btn-warning').addClass('btn-success')
+<% else %>
+  $(".autosave").html('False').removeClass('btn-success').addClass('btn-warning')
+<% end %>

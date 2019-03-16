@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+
+    <h1>
+      Hello <%= @receiver_email %>
+    </h1>
+
+    <p>You can now edit the note </p>
+
+    <p>OPEN
+      <a href="http://localhost:3000/notes/<%= @noteurl %>/sharednote">NOTE</a>
+    </p>
+
+    <p>Note <%= @noteurl %></p>
+    <p>Regards <%= @sender_email%> </p>
+  </body>
+</html>

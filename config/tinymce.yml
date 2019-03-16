@@ -1,0 +1,5 @@
+toolbar:
+   - formatselect | fontselect | fontsizeselect | bold | italic | underline | strikethrough | alignleft | aligncenter | alignjustify | alignright | undo redo
+   - forecolor | backcolor | outdent | indent | blockquote |
+menubar: false
+statusbar: false

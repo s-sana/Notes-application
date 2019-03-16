@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+
+    <h1>
+      Hello <%= @receiver_email %>
+    </h1>
+
+    <p>I want to edit the
+      <a href="http://localhost:3000/notes/<%= @noteurl %>/sharednote">NOTE</a>
+    </p>
+
+    <p>Note <%= @noteurl %></p>
+
+    <p>
+      <a href="http://localhost:3000/notes/<%= @noteurl %>/note_shares/update_edit_request">CLICK HERE</a>
+    </p>
+
+    <p>Regards <%= @sender_email%></p>
+
+  </body>
+</html>

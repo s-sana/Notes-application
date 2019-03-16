@@ -1,1 +1,1 @@
-$("#index-form").html(" <%= escape_javascript(render 'shownote' ) %>")
+$("#index-form").html(" <%= escape_javascript(render 'shownote',note: @note, comments: @comments, edit: @edit, user: @user ) %>")

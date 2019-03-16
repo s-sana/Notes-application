@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  reason: MyString
+  status: false
+
+two:
+  user: two
+  reason: MyString
+  status: false

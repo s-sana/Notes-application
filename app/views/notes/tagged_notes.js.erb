@@ -1,0 +1,2 @@
+$("#note-form").html(" <%= escape_javascript(render 'tagged_notes', notes: @notes) %>" );
+$("#note-form").modal("show");

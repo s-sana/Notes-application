@@ -1,0 +1,9 @@
+<h3 align="center">
+  <%= greet %> <u class="greetings"><%= current_user.username %></u>
+
+  <br><br>
+
+  <%=link_to new_note_path, remote: true do %>
+    <%= image_tag ("note.png")%>
+  <% end %>
+</h3>

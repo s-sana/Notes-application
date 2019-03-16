@@ -1,0 +1,20 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-body">
+      <%= form_with scope: :refund, url: refunds_path, remote: true do |form| %>
+
+        <div class="form-group">
+          <%= form.label :reason, class: "control-label"  %>
+          <%= form.text_field :reason, class: "form-control" %>
+        </div>
+
+        <div class="actions">
+          <%= form.submit class: "btn btn-success" %>
+        </div>
+
+      <% end %>
+    </div>
+
+  </div>
+
+</div>

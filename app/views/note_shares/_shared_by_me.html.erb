@@ -1,0 +1,62 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-body">
+      <% if noteshares.empty? %>
+        <h5 class="message">No Notes Shared by you</h5>
+      <% else %>
+      <h2 align="center">Shared by me</h2>
+
+        <table class="table" border="2" >
+          <thead class="table-dark">
+            <tr>
+              <th><center>No.</center></th>
+              <th><center>Title</center></th>
+              <th><center>Description</center></th>
+              <th><center>View</center></th>
+              <th><center>Edit</center></th>
+              <th><center>Shared with<center></th>
+              <th><center>Shared on<center></th>
+            </tr>
+          </thead>
+          <tbody class="notes-index">
+            <% no = 1 %>
+            <% noteshares.each do |note| %>
+              <tr class="table-info">
+                <td>
+                  <%= no %>
+                </td>
+                <td class="text-dark">
+                  <%= note.note.title %>
+                </td>
+                <td>
+                  <%= note.note.description.html_safe %>
+                </td>
+                <td>
+                  <% if note.view == true %>
+                    <span class="glyphicon glyphicon-ok-sign bg-success"></span>
+                  <% else %>
+                    <span class="glyphicon glyphicon-remove-sign bg-danger"></span>
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to "#{ note.edit ? 'ALLOW' : 'DENY' }",
+                    update_edit_request_path(note),
+                   method: :get,
+                   class: "btn btn-xs btn-#{ note.edit ? 'success' : 'danger' }"
+                  %>
+                </td>
+                <td>
+                  <%= note.email%>
+                </td>
+                <td>
+                  <%= note.created_at %>
+                </td>
+              </tr>
+            <% no += 1%>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>

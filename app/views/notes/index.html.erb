@@ -1,15 +1,28 @@
-<%= render 'layouts/header' %>
-<p id="notice" align="center"><%= notice %></p>
+<%= render 'layouts/header', note: @note, noteshare: @noteshare %>
+<p id="notice" align="center" ><%= notice %></p>
 
-
-<div class="container-fluid pull-left col-md-2.5 border" >
-  <h2 align="center" class="border">Notes</h2>
-    <%= link_to "New Note", new_note_path, remote: true ,class: "btn btn-info pull-left new-note"%>
-      <%= render 'layouts/side-menu'%>
+<div class="container-fluid pull-left col-md-2.5 bg-info" >
+  <div align="center">
+    <%= link_to "New Note",
+     new_note_path,
+     remote: true ,
+     class: "btn btn-info new-note  size "
+    %>
   </div>
+  <%= render 'layouts/side-menu', notes: @notes %>
+
 </div>
 
 <br>
+
+<%= link_to 'Pay', new_charge_path, class: "btn btn-info", remote: true%>
+<%= link_to 'Request Refund', new_refund_path, class: "btn btn-primary", remote: true %>
+<%# render 'layouts/welcome_page'%>
+
 <%# link_to 'New Note', new_note_path, remote: true %>
 <div class="modal fade" id="note-form"></div>
-<div id="index-form"></div>
+
+<div id="index-form" class="index-form">
+  <%= render 'layouts/welcome_page'%>
+</div>
+  <%# render 'layouts/footer'%>

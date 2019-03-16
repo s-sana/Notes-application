@@ -1,0 +1,8 @@
+$("ul.errors").html("")
+<% if noteshare.errors.any? %>
+  <% noteshare.errors.full_messages.each do |message| %>
+  $("ul.errors").append($("<li style='color:red;'/>").html("<%= message.html_safe %>"))
+  <% end %>
+<% else %>
+  $("#note-form").modal("hide")
+<% end %>

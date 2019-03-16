@@ -1,6 +1,78 @@
-<div class="modal-header">
-  <h1>New Note</h1>
-</div>
-<%= render 'form', note: @note %>
-
+<%# render 'form', note: @note %>
 <%# link_to 'Back', notes_path %>
+<%= tinymce_assets %>
+<div class="modal-dialog" id="note">
+  <div class="modal-content">
+    <%= form_for note,remote: true, :html=> {:id => 'note'}  do |form| %>
+
+      <div class="modal-body">
+
+        <div class="modal-header">
+          <h1>Note</h1>
+        </div>
+
+        <ul class="errors"></ul>
+
+        <div class="form-group">
+          <%= form.label :title, class: "control-label" %>
+          <%= form.text_field :title, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :description, class: "control-label"  %>
+          <%= form.text_area :description, class: "tinymce" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :tag_list, 'Tags (separated by commas)', class: "control-label"  %>
+          <%= form.text_field :tag_list ,class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.hidden_field :user_id, :value => current_user.id %>
+        </div>
+
+        <div class="form-group">
+            <%= form.check_box :important %>Mark as Imp
+        </div>
+
+        <div class="modal-footer">
+          <div class="actions">
+            <% if current_user.autosave == false %>
+              <%= form.submit class: "btn btn-success" %>
+            <% end %>
+            <% if current_user.autosave == true %>
+              <script type="text/javascript">
+                function autoSaveForm() {
+                  alert('hello');
+                  tinymce.triggerSave();
+                  //$.post( "/notes", function( data ) {
+                  //console.log(data);
+                  // });
+                  $.ajax({
+                   type: "POST",
+                   url: "notes",
+                   data: $("#note").serialize(),
+                   success: function(data) {
+                     console.log(data);
+                     console.log("Insert DONE")
+                    }
+                  });
+                }//end of function
+                setInterval(autoSaveForm, 10000); // do it every 10 seconds
+              </script>
+           <% end %>
+           <%= link_to "Cancel", "#",
+              class: "btn btn-danger",
+              data: {dismiss: "modal"}
+            %>
+          </div>
+        </div>
+
+      </div>
+
+
+    <% end %>
+  </div>
+<%= tinymce %>
+</div>

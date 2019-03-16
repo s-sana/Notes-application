@@ -1,5 +1,5 @@
 <h2>Edit comment</h2>
-<%= form_for([ @note, @comment ]) do |form| %>
+<%= form_for([ note, comment ], remote: true) do |form| %>
  <p>
    <%= form.text_area :body, class: "form-control" %>
  </p>

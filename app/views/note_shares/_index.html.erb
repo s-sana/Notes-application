@@ -1,0 +1,63 @@
+<div class="modal-dialog ">
+  <div class="modal-content">
+    <div class="modal-body">
+      <% if noteshares.empty? %>
+        <h4 class="message" align="center" >No Shared Notes</h4>
+      <% else %>
+        <h2 align="center">
+          Shared notes
+        </h2>
+        <table class="table" border="2" >
+          <thead class="table-dark">
+            <tr>
+              <th><center>No.</center></th>
+              <th><center>Title</center></th>
+              <th><center>Description</center></th>
+              <th><center>View</center></th>
+              <th><center>Edit</center></th>
+              <th><center>Shared by</center></th>
+              <th><center>Shared On</center></th>
+            </tr>
+          </thead>
+          <tbody class="notes-index">
+            <% no = 1 %>
+            <% noteshares.each do |noteshare| %>
+              <tr class="table-info">
+                <td>
+                  <%= no %>
+                </td>
+                <td class="text-dark">
+                  <%= noteshare.title %>
+                </td>
+                <td>
+                  <%= noteshare.description.html_safe %>
+                </td>
+                <td>
+                  <% if noteshare.view == true %>
+                    <%= link_to 'Show', shownote_note_path(noteshare) ,remote: true , class: "btn btn-info text-dark" %>
+                  <% else %>
+                    <%= link_to 'Request Access',request_view_path,class: "btn btn-info pull-right" ,remote: true %>
+                  <% end %>
+                </td>
+                <td>
+                  <% if noteshare.edit == true %>
+                    <%= link_to 'Edit note', edit_note_path(noteshare), class: "btn btn-info pull-right" ,remote: true %>
+                  <% else %>
+                    <%= link_to 'Request Access',request_edit_notes_path(noteshare),class: "btn btn-info pull-right" %>
+                  <% end %>
+                </td>
+                <td>
+                  <%= noteshare.username %>
+                </td>
+                <td>
+                  <%= noteshare.created_at %>
+                </td>
+              </tr>
+              <% no += 1%>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>
